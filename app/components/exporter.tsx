@@ -517,7 +517,7 @@ export function ImagePreviewer(props: {
           </div>
 
           <div>
-            <div className={styles["main-title"]}>NeatChat</div>
+            <div className={styles["main-title"]}>AwehomeAI</div>
             <div className={styles["sub-title"]}>
               github.com/tianzhentech/NeatChat
             </div>

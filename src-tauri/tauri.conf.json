@@ -8,7 +8,7 @@
     "withGlobalTauri": true
   },
   "package": {
-    "productName": "NeatChat",
+    "productName": "AwehomeAI",
     "version": "1.1.11-preview.1"
   },
   "tauri": {
@@ -82,7 +82,7 @@
         "signingIdentity": null
       },
       "resources": [],
-      "shortDescription": "NeatChat App",
+      "shortDescription": "AwehomeAI App",
       "targets": "all",
       "windows": {
         "certificateThumbprint": null,
@@ -103,7 +103,7 @@
         "fullscreen": false,
         "height": 600,
         "resizable": true,
-        "title": "NeatChat",
+        "title": "AwehomeAI",
         "width": 960,
         "hiddenTitle": true,
         "titleBarStyle": "Overlay"
