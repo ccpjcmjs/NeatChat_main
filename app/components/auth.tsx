@@ -40,7 +40,7 @@ export function AuthPage() {
         ></IconButton>
       </div>
       <div className={clsx("no-dark", styles["auth-logo"])}>
-        <NeatIcon width={30} height={30} />
+        <NeatIcon width={40} height={40} />
       </div>
 
       <div className={styles["auth-title"]}>{Locale.Auth.Title}</div>

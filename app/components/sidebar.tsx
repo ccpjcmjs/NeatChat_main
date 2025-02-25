@@ -237,7 +237,7 @@ export function SideBar(props: { className?: string }) {
       <SideBarHeader
         title="AwehomeAI"
         subTitle="A Better AI assistant."
-        logo={<NeatIcon width={44} height={44} />}
+        logo={<NeatIcon width={60} height={60} />}
         shouldNarrow={shouldNarrow}
       >
         <div className={styles["sidebar-header-bar"]}>
