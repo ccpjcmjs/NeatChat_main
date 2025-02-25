@@ -33,7 +33,7 @@ import clsx from "clsx";
 export function Loading(props: { noLogo?: boolean }) {
   return (
     <div className={clsx("no-dark", styles["loading-content"])}>
-      {!props.noLogo && <NeatIcon width={30} height={30} />}
+      {!props.noLogo && <NeatIcon width={40} height={40} />}
       <LoadingIcon />
     </div>
   );
