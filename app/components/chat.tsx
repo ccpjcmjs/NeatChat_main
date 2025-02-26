@@ -9,9 +9,6 @@ import React, {
   RefObject,
 } from "react";
 
-// 引入 Link 组件
-import { Link } from 'react-router-dom';
-
 import SendWhiteIcon from "../icons/send-white.svg";
 import BrainIcon from "../icons/brain.svg";
 import RenameIcon from "../icons/rename.svg";
@@ -455,6 +452,21 @@ function useScrollToBottom(
   };
 }
 
+// 新增：定义 HelpButton 组件
+function HelpButton(props: { helpLink: string }) {
+    return (
+        <a
+            href={props.helpLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles["chat-input-action"]}  // 使用与 ChatAction 相同的样式
+        >
+            <div className={styles["icon"]}>❓</div>
+            <div className={styles["text"]}>Help</div>
+        </a>
+    );
+}
+
 export function ChatActions(props: {
   uploadImage: () => void;
   setAttachImages: (images: string[]) => void;
@@ -765,11 +777,8 @@ export function ChatActions(props: {
           />
         )}
 
-        {/* 添加帮助按钮 */}
-        <Link to={helpLink} target="_blank" className={styles["chat-input-action"]}>
-          <div className={styles["icon"]}>❓</div>
-          <div className={styles["text"]}>Help</div>
-        </Link>
+        {/* 使用自定义的 HelpButton 组件 */}
+        <HelpButton helpLink={helpLink} />
 
         {showPluginSelector && (
           <SimpleMultipleSelector
