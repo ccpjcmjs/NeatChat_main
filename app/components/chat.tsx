@@ -749,6 +749,7 @@ export function ChatActions(props: {
             onClick={() => {
               if (currentModel === "gemini-2.0-flash-exp") {
                 setShowPluginSelector(true);
+                console.log("show plugin selector！");
               } else {
                 navigate(Path.Plugins);
               }
