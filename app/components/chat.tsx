@@ -9,6 +9,9 @@ import React, {
   RefObject,
 } from "react";
 
+// 引入 Link 组件
+import { Link } from 'react-router-dom';
+
 import SendWhiteIcon from "../icons/send-white.svg";
 import BrainIcon from "../icons/brain.svg";
 import RenameIcon from "../icons/rename.svg";
@@ -546,6 +549,9 @@ export function ChatActions(props: {
 
   const showModelSearchOption = config.enableModelSearch ?? false;
 
+  // 定义帮助链接地址
+  const helpLink = "https://uirg8pk95r.feishu.cn/docx/DspCdw6nLonIYJxg882cn2ZEnFh?from=from_copylink"; // 替换成你想要的链接
+
   return (
     <div className={styles["chat-input-actions"]}>
       <>
@@ -758,6 +764,13 @@ export function ChatActions(props: {
             icon={<PluginIcon />}
           />
         )}
+
+        {/* 添加帮助按钮 */}
+        <Link to={helpLink} target="_blank" className={styles["chat-input-action"]}>
+          <div className={styles["icon"]}>❓</div>
+          <div className={styles["text"]}>Help</div>
+        </Link>
+
         {showPluginSelector && (
           <SimpleMultipleSelector
             items={[
