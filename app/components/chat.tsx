@@ -454,17 +454,22 @@ function useScrollToBottom(
 
 // 新增：定义 HelpButton 组件
 function HelpButton(props: { helpLink: string }) {
-    return (
-        <a
-            href={props.helpLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles["chat-input-action"]}  // 使用与 ChatAction 相同的样式
-        >
-            <div className={styles["icon"]}>❓</div>
-            <div className={styles["text"]}>Help</div>
-        </a>
-    );
+  const [showHelp, setShowHelp] = useState(false);
+
+  return (
+    <a
+      href={props.helpLink}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={styles["chat-input-action"]}  // 使用与 ChatAction 相同的样式
+      style={{ textDecoration: 'none' }}  // 移除下划线
+      onMouseEnter={() => setShowHelp(true)}
+      onMouseLeave={() => setShowHelp(false)}
+    >
+      <div className={styles["icon"]}>❓</div>
+      <div className={styles["text"]}>{showHelp ? "Help" : ""}</div>
+    </a>
+  );
 }
 
 export function ChatActions(props: {
