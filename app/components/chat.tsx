@@ -455,19 +455,43 @@ function useScrollToBottom(
 // 新增：定义 HelpButton 组件
 function HelpButton(props: { helpLink: string }) {
   const [showHelp, setShowHelp] = useState(false);
+  const iconRef = useRef<HTMLDivElement>(null);
+  const textRef = useRef<HTMLDivElement>(null);
+  const [width, setWidth] = useState({
+    full: 16,
+    icon: 16,
+  });
+
+    function updateWidth() {
+    if (!iconRef.current || !textRef.current) return;
+    const getWidth = (dom: HTMLDivElement) => dom.getBoundingClientRect().width;
+    const textWidth = getWidth(textRef.current);
+    const iconWidth = getWidth(iconRef.current);
+    setWidth({
+      full: textWidth + iconWidth,
+      icon: iconWidth,
+    });
+  }
 
   return (
     <a
       href={props.helpLink}
       target="_blank"
       rel="noopener noreferrer"
-      className={styles["chat-input-action"]}  // 使用与 ChatAction 相同的样式
-      style={{ textDecoration: 'none' }}  // 移除下划线
-      onMouseEnter={() => setShowHelp(true)}
-      onMouseLeave={() => setShowHelp(false)}
+      className={clsx(styles["chat-input-action"], "clickable")}
+      style={{
+          "--icon-width": `${width.icon}px`,
+          "--full-width": `${width.full}px`,
+           textDecoration: 'none'
+        } as React.CSSProperties
+      }
+      onMouseEnter={() => {setShowHelp(true);updateWidth();}}
+      onMouseLeave={() => {setShowHelp(false);updateWidth();}}
+       onTouchStart={updateWidth}
+
     >
-      <div className={styles["icon"]}>❓</div>
-      <div className={styles["text"]}>{showHelp ? "帮助" : ""}</div>
+      <div ref={iconRef} className={styles["icon"]}>❓</div>
+      <div ref={textRef} className={styles["text"]}>{showHelp ? "帮助" : ""}</div>
     </a>
   );
 }
