@@ -454,24 +454,42 @@ function useScrollToBottom(
 
 // 新增：定义 HelpButton 组件
 function HelpButton(props: { helpLink: string }) {
-  const [showHelp, setShowHelp] = useState(false);
-  const iconRef = useRef<HTMLDivElement>(null);
-  const textRef = useRef<HTMLDivElement>(null);
-  const [width, setWidth] = useState({
-    full: 16,
-    icon: 16,
-  });
+    const [showHelp, setShowHelp] = useState(false);
+    const iconRef = useRef<HTMLDivElement>(null);
+    const textRef = useRef<HTMLDivElement>(null);
+    const [width, setWidth] = useState({
+        full: 16,
+        icon: 16,
+    });
+
+    useEffect(() => {
+        if (!textRef.current) return;
+
+        const resizeObserver = new ResizeObserver(entries => {
+            for (let entry of entries) {
+                if (entry.target === textRef.current) {
+                    updateWidth(); // 当 textRef 的尺寸变化时，更新宽度
+                }
+            }
+        });
+
+        resizeObserver.observe(textRef.current);
+
+        return () => resizeObserver.disconnect(); // 组件卸载时停止观察
+    }, [textRef]);
 
     function updateWidth() {
-    if (!iconRef.current || !textRef.current) return;
-    const getWidth = (dom: HTMLDivElement) => dom.getBoundingClientRect().width;
-    const textWidth = getWidth(textRef.current);
-    const iconWidth = getWidth(iconRef.current);
-    setWidth({
-      full: textWidth + iconWidth,
-      icon: iconWidth,
-    });
-  }
+        if (!iconRef.current || !textRef.current) return;
+        const getWidth = (dom: HTMLDivElement) => dom.getBoundingClientRect().width;
+        const textWidth = getWidth(textRef.current);
+        const iconWidth = getWidth(iconRef.current);
+        setWidth({
+            full: textWidth + iconWidth,
+            icon: iconWidth,
+        });
+    }
+    // 其余部分保持不变
+
 
   return (
     <a
