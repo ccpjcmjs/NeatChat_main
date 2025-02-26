@@ -453,6 +453,7 @@ function useScrollToBottom(
 }
 
 // 新增：定义 HelpButton 组件
+// 修改：定义 HelpButton 组件
 function HelpButton(props: { helpLink: string }) {
   const [showHelp, setShowHelp] = useState(false);
   const [helpTimer, setHelpTimer] = useState<NodeJS.Timeout | null>(null);
