@@ -452,17 +452,66 @@ function useScrollToBottom(
   };
 }
 
-// 新增：定义 HelpButton 组件
 // 修改：定义 HelpButton 组件
 function HelpButton(props: { helpLink: string }) {
   const [showHelp, setShowHelp] = useState(false);
-  const [helpTimer, setHelpTimer] = useState<NodeJS.Timeout | null>(null);
+  const [helpTimer, setHelpTimer] = useState<null>(null);
   const iconRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState({
     full: 16,
     icon: 16,
   });
+
+  function updateWidth() {
+    if (!iconRef.current || !textRef.current) return;
+    const getWidth = (dom: HTMLDivElement) => dom.getBoundingClientRect().width;
+    const textWidth = getWidth(textRef.current);
+    const iconWidth = getWidth(iconRef.current);
+    setWidth({
+      full: textWidth + iconWidth,
+      icon: iconWidth,
+    });
+  }
+
+  const handleMouseEnter = () => {
+    const timer = setTimeout(() => {
+      setShowHelp(true);
+      updateWidth();
+    }, 100); // 设置延迟时间，例如 100ms
+    setHelpTimer(timer);
+  };
+
+  const handleMouseLeave = () => {
+    if (helpTimer) {
+      clearTimeout(helpTimer);
+    }
+    setShowHelp(false);
+    updateWidth();
+    setHelpTimer(null);
+  };
+
+  useEffect(() => {
+    updateWidth();
+  }, [showHelp]);
+
+  return (
+    <a
+      href={props.helpLink}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={clsx(styles["chat-input-action"], "clickable")}  // 使用与 ChatAction 相同的样式
+      style={{ textDecoration: 'none', "--icon-width": `${width.icon}px`,
+      "--full-width": `${width.full}px`, }}  // 移除下划线
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <div ref={iconRef} className={styles["icon"]}>❓</div>
+      <div className={styles["text"]} ref={textRef}>{showHelp ? "Help" : ""}</div>
+    </a>
+  );
+}
+
 
   function updateWidth() {
     if (!iconRef.current || !textRef.current) return;
