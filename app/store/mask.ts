@@ -20,6 +20,8 @@ export type Mask = {
   plugin?: string[];
   enableArtifacts?: boolean;
   enableCodeFold?: boolean;
+  isWebSearchEnabled?: boolean;  // 关键： 确保这里有 isWebSearchEnabled 属性
+
 };
 
 export const DEFAULT_MASK_STATE = {
