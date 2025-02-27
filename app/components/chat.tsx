@@ -85,6 +85,12 @@ import Locale from "../locales";
 import { IconButton } from "./button";
 import styles from "./chat.module.scss";
 
+import { useChatStore } from "../store";
+import { GlobalOutlined } from '@ant-design/icons';
+import { Tooltip } from 'antd';
+
+
+
 import {
   List,
   ListItem,
@@ -533,6 +539,14 @@ export function ChatActions(props: {
   const pluginStore = usePluginStore();
   const session = chatStore.currentSession();
 
+  const isWebSearchEnabled = session.mask.isWebSearchEnabled;
+
+  const toggleWebSearch = () => {
+    chatStore.updateTargetSession(session, (session) => {
+      session.mask.isWebSearchEnabled = !session.mask.isWebSearchEnabled;
+    });
+  };
+
   // switch themes
   const theme = config.theme;
   function nextTheme() {
@@ -861,6 +875,29 @@ export function ChatActions(props: {
             icon={<ShortcutkeyIcon />}
           />
         )}
+
+        {/* 新增联网搜索图标 */}
+        <Tooltip title={Locale.Plugin.EnableWeb}>
+          <GlobalOutlined
+            onClick={toggleWebSearch}
+            style={{
+              color: isWebSearchEnabled
+                ? "var(--color-link)"
+                : "var(--color-icon)",
+              fontSize: "16px", // 调整图标大小
+            }}
+          />
+        </Tooltip>
+        {showPlugins(currentProviderName, currentModel) && (
+          <ChatAction
+            onClick={() => {
+              // ... 其他插件按钮的逻辑
+            }}
+            text={Locale.Plugin.Name}
+            icon={<PluginIcon />}
+          />
+        )}
+
       </>
       <div className={styles["chat-input-actions-end"]}>
         {config.realtimeConfig.enable && (
