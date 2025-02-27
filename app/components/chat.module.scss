@@ -7,6 +7,17 @@
   display: flex;
 }
 
+/* chat.module.scss */
+.webSearchIcon {
+  font-size: 16px; /* 调整图标大小 */
+  cursor: pointer; /* 添加点击效果 */
+  color: var(--color-icon); /* 默认图标颜色 */
+
+  &.active {
+    color: var(--color-link); /* 激活状态的颜色 */
+  }
+}
+
 .attach-image {
   cursor: default;
   width: 64px;
