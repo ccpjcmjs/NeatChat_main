@@ -85,7 +85,6 @@ import Locale from "../locales";
 import { IconButton } from "./button";
 import styles from "./chat.module.scss";
 
-import { useChatStore } from "../store";
 import { GlobalOutlined } from '@ant-design/icons';
 import { Tooltip } from 'antd';
 
