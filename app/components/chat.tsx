@@ -85,6 +85,8 @@ import Locale from "../locales";
 import { IconButton } from "./button";
 import styles from "./chat.module.scss";
 
+import { GlobalOutlined } from '@ant-design/icons';
+
 
 import {
   List,
@@ -377,6 +379,7 @@ export function ChatAction(props: {
   icon: JSX.Element;
   onClick: () => void;
   className?: string;  // 添加className属性
+  title?: string;
 }) {
   const iconRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
