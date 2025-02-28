@@ -12,9 +12,29 @@
   font-size: 16px; /* 调整图标大小 */
   cursor: pointer; /* 添加点击效果 */
   color: var(--color-icon); /* 默认图标颜色 */
+}
 
-  &.active {
-    color: #1890ff; /* 或你喜欢的蓝色 */
+.active-action {
+  background-color: var(--primary-light) !important;
+  &:hover {
+    background-color: var(--primary-light) !important;
+  }
+
+  .text {
+    color: var(--primary) !important;
+  }
+
+  .icon {
+    color: var(--primary) !important;
+  }
+}
+
+.chat-input-action {
+  min-width: 80px;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: var(--hover-color);
   }
 }
 

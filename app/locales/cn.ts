@@ -656,7 +656,8 @@ const cn = {
   },
   Plugin: {
     Name: "插件",
-    EnableWeb: "开启联网",
+    EnableWeb: "联网搜索",
+    DisableWeb: "关闭联网",
     Page: {
       Title: "插件",
       SubTitle: (count: number) => `${count} 个插件`,

@@ -877,11 +877,23 @@ export function ChatActions(props: {
 
         {/* 新增联网搜索图标 */}
         <ChatAction
-          onClick={toggleWebSearch}
-          icon={<GlobalOutlined style={{ fontSize: "16px" }} />}
-          text={Locale.Plugin.EnableWeb}
-          isActive={isWebSearchEnabled}  // 控制激活状态
+            onClick={toggleWebSearch}
+            text={isWebSearchEnabled ? Locale.Plugin.DisableWeb : Locale.Plugin.EnableWeb}
+            icon={
+              <GlobalOutlined
+                  style={{
+                    fontSize: "16px",
+                    color: isWebSearchEnabled ? "var(--primary)" : "inherit",
+                  }}
+              />
+            }
+            className={clsx({
+              [styles["active-action"]]: isWebSearchEnabled,
+            })}
+            title={Locale.Plugin.EnableWeb}
         />
+
+
         {showPlugins(currentProviderName, currentModel) && (
           <ChatAction
             onClick={() => {
