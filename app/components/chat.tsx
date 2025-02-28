@@ -540,11 +540,39 @@ export function ChatActions(props: {
 
   const isWebSearchEnabled = session.mask.isWebSearchEnabled;
 
-  const toggleWebSearch = () => {
+  // 当前按钮逻辑需要同步实现：
+// 联网搜索按钮组件
+const WebSearchButton = () => {
+  const session = useChatStore().currentSession();
+
+  const toggleWebSearch = useCallback(() => {
     chatStore.updateTargetSession(session, (session) => {
-      session.mask.isWebSearchEnabled = !session.mask.isWebSearchEnabled;
+      const plugins = [...(session.mask.plugin || [])];
+      const index = plugins.indexOf("googleSearch");
+
+      if (index === -1) {
+        plugins.push("googleSearch");
+      } else {
+        plugins.splice(index, 1);
+      }
+
+      session.mask.plugin = plugins;
+      session.mask.isWebSearchEnabled = plugins.includes("googleSearch");
     });
-  };
+  }, [session.id]);
+
+  return (
+    <ChatAction
+      onClick={toggleWebSearch}
+      text={session.mask.isWebSearchEnabled ? "关闭搜索" : "启用搜索"}
+      icon={<GlobalOutlined style={{ fontSize: 16 }} />}
+      className={clsx(styles["web-search-action"], {
+        [styles.active]: session.mask.isWebSearchEnabled,
+      })}
+    />
+  );
+};
+
 
   // switch themes
   const theme = config.theme;
@@ -887,8 +915,8 @@ export function ChatActions(props: {
                   }}
               />
             }
-            className={clsx({
-              [styles["active-action"]]: isWebSearchEnabled,
+            className={clsx(styles["web-search-action"], {
+              [styles.active]: isWebSearchEnabled,
             })}
             title={Locale.Plugin.EnableWeb}
         />

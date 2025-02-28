@@ -29,14 +29,14 @@
   }
 }
 
-.chat-input-action {
-  min-width: 80px;
-  transition: background-color 0.2s ease;
-
-  &:hover {
-    background-color: var(--hover-color);
-  }
-}
+//.chat-input-action {
+//  //min-width: 80px;
+//  transition: background-color 0.2s ease;
+//
+//  &:hover {
+//    background-color: var(--hover-color);
+//  }
+//}
 
 .attach-image {
   cursor: default;
@@ -78,6 +78,18 @@
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 5px;
+
+  .web-search-action {
+    transition: all 0.2s ease;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+
+    &.active {
+      box-shadow: 0 2px 8px rgba(var(--primary-rgb), 0.2);
+    }
+  }
 
   &-end {
     display: flex;
