@@ -876,17 +876,12 @@ export function ChatActions(props: {
         )}
 
         {/* 新增联网搜索图标 */}
-        <Tooltip title={Locale.Plugin.EnableWeb}>
-          <GlobalOutlined
-              className={clsx(styles.webSearchIcon, {
-                [styles.active]: isWebSearchEnabled,
-              })}
-              onClick={toggleWebSearch}
-              style={{
-                fontSize: "16px", // 调整图标大小
-              }}
-          />
-        </Tooltip>
+        <ChatAction
+          onClick={toggleWebSearch}
+          icon={<GlobalOutlined style={{ fontSize: "16px" }} />}
+          text={Locale.Plugin.EnableWeb}
+          isActive={isWebSearchEnabled}  // 控制激活状态
+        />
         {showPlugins(currentProviderName, currentModel) && (
           <ChatAction
             onClick={() => {
