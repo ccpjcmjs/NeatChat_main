@@ -666,6 +666,7 @@ const en: LocaleType = {
   Plugin: {
     Name: "Plugins",
     EnableWeb: "Enable Web Access",
+    DisableWeb: "Disable Web Access",
     Page: {
       Title: "Plugins",
       SubTitle: (count: number) => `${count} plugins`,
