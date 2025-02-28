@@ -85,10 +85,6 @@ import Locale from "../locales";
 import { IconButton } from "./button";
 import styles from "./chat.module.scss";
 
-import { GlobalOutlined } from '@ant-design/icons';
-import { Tooltip } from 'antd';
-
-
 
 import {
   List,
@@ -380,6 +376,7 @@ export function ChatAction(props: {
   text: string;
   icon: JSX.Element;
   onClick: () => void;
+  className?: string;  // 添加className属性
 }) {
   const iconRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
@@ -401,7 +398,7 @@ export function ChatAction(props: {
 
   return (
     <div
-      className={clsx(styles["chat-input-action"], "clickable")}
+      className={clsx(styles["chat-input-action"], props.className)} // 应用className
       onClick={() => {
         props.onClick();
         setTimeout(updateWidth, 1);
